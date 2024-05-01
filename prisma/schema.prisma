@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model stats {
+  statsId BigInt @id @default(autoincrement())
+  baseState BigInt
+  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId BigInt
+}
+
+model types {
+  typesId BigInt @id @default(autoincrement())
+  typeName String
+  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId BigInt
+}
+
+model sprites {
+  spritesId BigInt @id @default(autoincrement())
+  frontDefault String
+  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId BigInt
+}
+
+model descriptions {
+  descriptionsId BigInt @id @default(autoincrement())
+  descriptions String
+  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId BigInt
+}
+
+model categories {
+  categoriesId BigInt @id @default(autoincrement())
+  name String
+  description String
+  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId BigInt
+}
+
+model pokemon {
+  pokemonId BigInt @id
+  categoryId BigInt
+  name String
+  price BigInt
+  rarity BigInt
+  count BigInt
+  statsId stats[]
+  typesId types[]
+  spritesId sprites[]
+  descriptionsId descriptions[]
+  categoriesId categories[]
+  cart cart_pokemon []
+}
+
+model cart_pokemon {
+  id BigInt @id @default(autoincrement())
+  pokemon pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  cart cart? @relation(fields: [cartId], references: [cartId])
+  cartId BigInt
+  pokemonId BigInt
+}
+
+model cart {
+  cartId BigInt @id
+  pokemonId BigInt
+  userId BigInt
+  count BigInt
+  pokemon cart_pokemon[]
+}
+
+// not sure why it is missing, also when I try to add 
+// user order [] it still doesn't understand
+model order {
+  orderId BigInt @id @default(autoincrement())
+  // order order? @relation(fields: [orderId], references: [orderId])
+  // user user? @relation(fields: [userId], references: [userId])
+  userId BigInt
+  cartId BigInt
+}
+
+model user {
+  userId BigInt @id 
+  firstAndLastName String
+  email String @unique
+  username String @unique
+  password String
+  isAdmin Boolean?
+}

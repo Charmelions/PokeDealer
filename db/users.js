@@ -10,9 +10,13 @@ const createUser = async ({
   email,
   username,
   password,
-  cart,
+  cartId,
 }) => {
   try {
+    const cart = await prisma.cart.findUnique({
+      where: { cartId },
+    });
+
     const newUser = await prisma.user.create({
       data: { firstAndLastName, email, username, password, cart },
     });

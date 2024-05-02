@@ -50,7 +50,7 @@ model categories {
 }
 
 model pokemon {
-  pokemonId BigInt @id
+  pokemonId BigInt @id 
   categoryId BigInt
   name String
   price BigInt
@@ -61,7 +61,7 @@ model pokemon {
   spritesId sprites[]
   descriptionsId descriptions[]
   categoriesId categories[]
-  cart cart_pokemon []
+  cart cart_pokemon[]
 }
 
 model cart_pokemon {
@@ -78,23 +78,25 @@ model cart {
   userId BigInt
   count BigInt
   pokemon cart_pokemon[]
+  user order[]
 }
 
 // not sure why it is missing, also when I try to add 
 // user order [] it still doesn't understand
 model order {
   orderId BigInt @id @default(autoincrement())
-  // order order? @relation(fields: [orderId], references: [orderId])
-  // user user? @relation(fields: [userId], references: [userId])
+  user user? @relation(fields: [userId], references: [userId])
   userId BigInt
   cartId BigInt
+  cart cart? @relation(fields: [cartId], references: [cartId])
 }
 
 model user {
-  userId BigInt @id 
+  userId BigInt @id @default(autoincrement())
   firstAndLastName String
   email String @unique
   username String @unique
   password String
   isAdmin Boolean?
+  cart order[]
 }

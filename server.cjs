@@ -3,19 +3,26 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const fs = require('fs'); // nodejs "file system" module where we are saving our morgan log
+const path = require('path'); // creates a path in our "file system" to the file we are saving our morgan log in
 const jwt = require('jsonwebtoken');
 // const { getUserById } = require('');
 
-//middleware
-app.use(morgan("dev"));
+const PORT = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({extended: true}));
+// creates our access.log file and stores our morgan log inside access.log
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+
+//middleware
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :date[web]', { stream: accessLogStream }));
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Parse the apiRouter headers to see if there is a token on the user ID (will require a getUserById from a db function and requires jsonwebtoken))
 app.use(async (req, res, next) => {
-  const authHeader = req.header("Authorization");
-  const prefix = "Bearer ";
+  const authHeader = req.header('Authorization');
+  const prefix = 'Bearer ';
 
   if (!authHeader) {
     next();
@@ -35,6 +42,6 @@ app.use(async (req, res, next) => {
 });
 
 //API ROUTE (file location TBD)
-// app.use('/', require('./api/index'));
+app.use('/', (req, res) => { res.send('reached / endpoint'); });
 
-app.listen(8080, () => console.log(`listening on port 8080`));
+app.listen(PORT, () => console.log(`listening on port ${PORT}`));

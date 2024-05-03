@@ -6,8 +6,10 @@ const morgan = require('morgan');
 const fs = require('fs'); // nodejs "file system" module where we are saving our morgan log
 const path = require('path'); // creates a path in our "file system" to the file we are saving our morgan log in
 const jwt = require('jsonwebtoken');
+
 // import { PrismaClient } from '@prisma/client'
 // const prisma = new PrismaClient()
+
 // const { getUserById } = require('');
 
 const PORT = process.env.PORT || 3000;
@@ -45,6 +47,7 @@ app.use(async (req, res, next) => {
 
 //API ROUTE (file location TBD)
 app.use('/', (req, res) => { res.send('reached / endpoint'); });
+
 
 // export default prisma
 

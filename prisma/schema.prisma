@@ -14,86 +14,84 @@ datasource db {
 }
 
 model stats {
-  statsId BigInt @id @default(autoincrement())
+  statsId   BigInt  @id @default(autoincrement())
   baseState BigInt
-  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemon   pokemon @relation(fields: [pokemonId], references: [pokemonId])
   pokemonId BigInt
 }
 
 model types {
-  typesId BigInt @id @default(autoincrement())
-  typeName String
-  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  typesId   BigInt  @id @default(autoincrement())
+  typeName  String
+  pokemon   pokemon @relation(fields: [pokemonId], references: [pokemonId])
   pokemonId BigInt
 }
 
 model sprites {
-  spritesId BigInt @id @default(autoincrement())
+  spritesId    BigInt  @id @default(autoincrement())
   frontDefault String
-  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId BigInt
+  pokemon      pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId    BigInt
 }
 
 model descriptions {
-  descriptionsId BigInt @id @default(autoincrement())
-  descriptions String
-  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId BigInt
+  descriptionsId BigInt  @id @default(autoincrement())
+  descriptions   String
+  pokemon        pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId      BigInt
 }
 
 model categories {
-  categoriesId BigInt @id @default(autoincrement())
-  name String
-  description String
-  pokemon pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId BigInt
+  categoriesId BigInt  @id @default(autoincrement())
+  name         String
+  description  String
+  pokemon      pokemon @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId    BigInt
 }
 
 model pokemon {
-  pokemonId BigInt @id 
-  name String
-  price BigInt
-  rarity BigInt
-  count BigInt
-  statsId stats[]
-  typesId types[]
-  spritesId sprites[]
+  pokemonId      BigInt         @id
+  name           String
+  price          BigInt
+  rarity         BigInt
+  count          BigInt
+  statsId        stats[]
+  typesId        types[]
+  spritesId      sprites[]
   descriptionsId descriptions[]
-  categoriesId categories[]
-  cart cart_pokemon[]
+  categoriesId   categories[]
+  cart           cart_pokemon[]
 }
 
 model cart_pokemon {
-  id BigInt @id @default(autoincrement())
-  pokemon pokemon? @relation(fields: [pokemonId], references: [pokemonId])
-  cart cart? @relation(fields: [cartId], references: [cartId])
-  cartId BigInt
-  pokemonId BigInt
+  id        BigInt   @id @default(autoincrement())
+  pokemon   pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  cart      cart?    @relation(fields: [cartId], references: [cartId])
+  cartId    BigInt?
+  pokemonId BigInt?
 }
 
 model cart {
-  cartId BigInt @id
-  pokemonId BigInt
-  userId BigInt
-  count BigInt
+  cartId  BigInt         @id
+  count   BigInt
   pokemon cart_pokemon[]
-  user order[]
+  user    order[]
 }
 
 model order {
-  orderId BigInt @id @default(autoincrement())
-  user user? @relation(fields: [userId], references: [userId])
-  userId BigInt
-  cartId BigInt
-  cart cart? @relation(fields: [cartId], references: [cartId])
+  orderId BigInt  @id @default(autoincrement())
+  user    user?   @relation(fields: [userId], references: [userId])
+  userId  BigInt?
+  cart    cart    @relation(fields: [cartId], references: [cartId])
+  cartId  BigInt
 }
 
 model user {
-  userId BigInt @id @default(autoincrement())
+  userId           BigInt   @id @default(autoincrement())
   firstAndLastName String
-  email String @unique
-  username String @unique
-  password String
-  isAdmin Boolean?
-  cart order[]
+  email            String   @unique
+  username         String   @unique
+  password         String
+  isAdmin          Boolean?
+  cart             order[]
 }

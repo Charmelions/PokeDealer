@@ -50,15 +50,14 @@ model categories {
 }
 
 model pokemon {
-  pokemonId      BigInt         @id
-  categoryId     BigInt
-  name           String
-  price          BigInt
-  rarity         BigInt
-  count          BigInt
-  statsId        stats[]
-  typesId        types[]
-  spritesId      sprites[]
+  pokemonId BigInt @id 
+  name String
+  price BigInt
+  rarity BigInt
+  count BigInt
+  statsId stats[]
+  typesId types[]
+  spritesId sprites[]
   descriptionsId descriptions[]
   categoriesId   categories[]
   cart           cart_pokemon[]
@@ -81,8 +80,6 @@ model cart {
   user      order[]
 }
 
-// not sure why it is missing, also when I try to add 
-// user order [] it still doesn't understand
 model order {
   orderId BigInt  @id @default(autoincrement())
   user    user?   @relation(fields: [userId], references: [userId])

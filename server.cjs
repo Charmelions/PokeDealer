@@ -8,6 +8,7 @@ const path = require("path"); // creates a path in our "file system" to the file
 const jwt = require("jsonwebtoken");
 // import { PrismaClient } from '@prisma/client'
 // const prisma = new PrismaClient()
+
 // const { getUserById } = require('');
 
 const PORT = process.env.PORT || 3000;

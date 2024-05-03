@@ -1,7 +1,16 @@
+import { Routes, Route } from "react-router-dom";
+import { Home } from "./components/Home.jsx";
+
 function App() {
-  return <>
-  "Hello World!"
-  </>;
+  
+  return (
+  <>
+  <Routes>
+  <Route path="/" element={<Home />} />
+  </Routes>
+  </>
+  );
 }
+
 
 export default App;

@@ -1,15 +1,57 @@
-import { describe, expect, test } from "@jest/globals";
-import {
-  createUser,
-  getUserByUsername,
-  getUserById,
-  adminUpdateUser,
-  updateUser,
-  deleteUser,
-} from "../db/users";
+const { createUser } = require("../db/users");
+const { prismaMock } = require("../testing/singleton");
 
-describe("create a new user", () => {
-  test("given a firstAndLastName, email, username, password, and cartId via the Order table", () => {
-    expect(createUser(1, 2)).toBe(3);
+// these tests imported for learning purposes
+// https://github.com/OctobugDemo/nodejs-prisma-unit-test/blob/main/functions-without-context.test.js
+// I will be re-writing these
+
+test("should create new user ", async () => {
+  const user = {
+    id: 1,
+    name: "Rich",
+    email: "hello@prisma.io",
+    acceptTermsAndConditions: true,
+  };
+
+  prismaMock.user.create.mockResolvedValue(user);
+
+  await expect(createUser(user)).resolves.toEqual({
+    id: 1,
+    name: "Rich",
+    email: "hello@prisma.io",
+    acceptTermsAndConditions: true,
   });
+});
+
+test("should update a users name ", async () => {
+  const user = {
+    id: 1,
+    name: "Rich Haines",
+    email: "hello@prisma.io",
+  };
+
+  prismaMock.user.update.mockResolvedValue(user);
+
+  await expect(updateUsername(user)).resolves.toEqual({
+    id: 1,
+    name: "Rich Haines",
+    email: "hello@prisma.io",
+  });
+});
+
+test("should fail if user does not accept terms", async () => {
+  const user = {
+    id: 1,
+    name: "Rich Haines",
+    email: "hello@prisma.io",
+    acceptTermsAndConditions: false,
+  };
+
+  prismaMock.user.create.mockRejectedValue(
+    new Error("User must accept terms!")
+  );
+
+  await expect(createUser(user)).resolves.toEqual(
+    new Error("User must accept terms!")
+  );
 });

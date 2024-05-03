@@ -68,24 +68,22 @@ model cart_pokemon {
   pokemon   pokemon? @relation(fields: [pokemonId], references: [pokemonId])
   cart      cart?    @relation(fields: [cartId], references: [cartId])
   cartId    BigInt?
-  pokemonId BigInt
+  pokemonId BigInt?
 }
 
 model cart {
-  cartId    BigInt         @id
-  pokemonId BigInt
-  // userId BigInt
-  count     BigInt
-  pokemon   cart_pokemon[]
-  user      order[]
+  cartId  BigInt         @id
+  count   BigInt
+  pokemon cart_pokemon[]
+  user    order[]
 }
 
 model order {
   orderId BigInt  @id @default(autoincrement())
   user    user?   @relation(fields: [userId], references: [userId])
-  userId  BigInt
-  cartId  BigInt?
-  cart    cart?   @relation(fields: [cartId], references: [cartId])
+  userId  BigInt?
+  cart    cart    @relation(fields: [cartId], references: [cartId])
+  cartId  BigInt
 }
 
 model user {

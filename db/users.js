@@ -20,7 +20,7 @@ const createUser = async ({
     return newUser;
   } catch (err) {
     console.log("Error creating user", err);
-    return undefined;
+    throw err;
   }
 };
 
@@ -36,7 +36,7 @@ const getUserByUsername = async (username) => {
     return user;
   } catch (err) {
     console.log("Error getting user", err);
-    return undefined;
+    throw err;
   }
 };
 

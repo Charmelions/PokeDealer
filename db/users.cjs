@@ -5,16 +5,10 @@ const bcrypt = require("bcrypt");
 
 // Create/POST
 
-const createUser = async ({
-  firstAndLastName,
-  email,
-  username,
-  password,
-  cartId,
-}) => {
+const createUser = async ({ firstAndLastName, email, username, password }) => {
   try {
     const newUser = await prisma.user.create({
-      data: { firstAndLastName, email, username, password, cart: cartId },
+      data: { firstAndLastName, email, username, password },
     });
 
     return newUser;
@@ -25,6 +19,16 @@ const createUser = async ({
 };
 
 // Read/GET
+
+const getAllUsers = async () => {
+  try {
+    const rows = await prisma.user.findMany();
+
+    return rows;
+  } catch (err) {
+    throw err;
+  }
+};
 
 const getUserByUsername = async (username) => {
   try {
@@ -73,7 +77,7 @@ const adminUpdateUser = async (username, isAdmin) => {
   }
 };
 
-const updateUser = async (username, password, isAdmin) => {
+const updateUser = async (username, password, userId) => {
   try {
     const plainTextPassword = password;
     const saltRounds = 10;
@@ -81,12 +85,11 @@ const updateUser = async (username, password, isAdmin) => {
 
     const updatedUser = await prisma.user.update({
       where: {
-        isAdmin: true,
+        userId,
       },
       data: {
         username,
         password: hashedPassword,
-        isAdmin,
       },
     });
 
@@ -116,6 +119,7 @@ const deleteUser = async (req, id) => {
 
 module.exports = {
   createUser,
+  getAllUsers,
   getUserByUsername,
   getUserById,
   adminUpdateUser,

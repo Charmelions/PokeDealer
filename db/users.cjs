@@ -102,14 +102,12 @@ const updateUser = async (username, password, userId) => {
 
 const deleteUser = async (req, id) => {
   try {
-    const user = await prisma.user.delete({
+    await prisma.user.delete({
       where: {
         id: parseInt(id),
         userId: req.user.id,
       },
     });
-
-    return user;
   } catch (err) {
     console.log("Oops! Try that again.", err);
     throw err;

@@ -3,10 +3,10 @@ const prisma = require("../client.cjs");
 
 // Create/POST
 
-const createCart = async ({ cartId, count, pokemon }) => {
+const createCart = async ({ count, pokemon }) => {
   try {
     const cartDB = await prisma.cart.create({
-      data: { cartId, count, pokemon },
+      data: { count, pokemon },
     });
 
     return cartDB;
@@ -18,7 +18,7 @@ const createCart = async ({ cartId, count, pokemon }) => {
 
 // Read/GET
 
-const getCartcartId = async (cartId) => {
+const getCartId = async (cartId) => {
   try {
     const cart = await prisma.cart.findUnique({
       where: {
@@ -69,7 +69,7 @@ const deleteCart = async (cartId) => {
 
 module.exports = {
   createCart,
-  getCartcartId,
+  getCartId,
   updateCart,
   deleteCart,
 };

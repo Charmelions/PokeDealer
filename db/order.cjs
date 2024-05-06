@@ -45,7 +45,7 @@ const getOrderId = async (orderId) => {
 
 const updateOrder = async (orderId, cartId) => {
   try {
-    const updatedorder = await prisma.order.update({
+    const updatedOrder = await prisma.order.update({
       where: {
         orderId,
       },
@@ -54,7 +54,7 @@ const updateOrder = async (orderId, cartId) => {
       },
     });
 
-    return updatedorder;
+    return updatedOrder;
   } catch (err) {
     throw err;
   }

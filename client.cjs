@@ -1,4 +1,4 @@
-// this client is for mocking Prisma with Jest
+// this client connects to Prisma
 
 const { PrismaClient } = require("@prisma/client");
 

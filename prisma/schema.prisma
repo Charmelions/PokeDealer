@@ -14,39 +14,40 @@ datasource db {
 }
 
 model stats {
-  statsId   BigInt  @id @default(autoincrement())
-  baseState BigInt
-  pokemon   pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId BigInt
+  statsId   BigInt   @id @default(autoincrement())
+  baseStat  BigInt
+  pokemon   pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId BigInt?
 }
 
 model types {
-  typesId   BigInt  @id @default(autoincrement())
+  typesId   BigInt   @id @default(autoincrement())
   typeName  String
-  pokemon   pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId BigInt
+  pokemon   pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId BigInt?
 }
 
 model sprites {
-  spritesId    BigInt  @id @default(autoincrement())
+  spritesId    BigInt   @id @default(autoincrement())
   frontDefault String
-  pokemon      pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId    BigInt
+  // add in the pokeapi image endpoints I want here on each line
+  pokemon      pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId    BigInt?
 }
 
 model descriptions {
-  descriptionsId BigInt  @id @default(autoincrement())
+  descriptionsId BigInt   @id @default(autoincrement())
   descriptions   String
-  pokemon        pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId      BigInt
+  pokemon        pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId      BigInt?
 }
 
 model categories {
-  categoriesId BigInt  @id @default(autoincrement())
+  categoriesId BigInt   @id @default(autoincrement())
   name         String
   description  String
-  pokemon      pokemon @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId    BigInt
+  pokemon      pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId    BigInt?
 }
 
 model pokemon {
@@ -72,7 +73,7 @@ model cart_pokemon {
 }
 
 model cart {
-  cartId  BigInt         @id
+  cartId  BigInt         @id @default(autoincrement())
   count   BigInt
   pokemon cart_pokemon[]
   user    order[]
@@ -82,8 +83,8 @@ model order {
   orderId BigInt  @id @default(autoincrement())
   user    user?   @relation(fields: [userId], references: [userId])
   userId  BigInt?
-  cart    cart    @relation(fields: [cartId], references: [cartId])
-  cartId  BigInt
+  cart    cart?   @relation(fields: [cartId], references: [cartId])
+  cartId  BigInt?
 }
 
 model user {

@@ -28,11 +28,19 @@ model types {
 }
 
 model sprites {
-  spritesId    BigInt   @id @default(autoincrement())
-  frontDefault String
-  // add in the pokeapi image endpoints I want here on each line
-  pokemon      pokemon? @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId    BigInt?
+  spritesId       BigInt   @id @default(autoincrement())
+  // other/dream_world/front_default image URL
+  dreamDefault    String?
+  // other/home/front_default image URL
+  homeDefault     String?
+  // other/home/front_shiny image URL
+  homeShiny       String?
+  // other/official-artwork/front_default image URL
+  officialDefault String?
+  // other/official-artwork/front_shiny image URL
+  officialShiny   String?
+  pokemon         pokemon? @relation(fields: [pokemonId], references: [pokemonId])
+  pokemonId       BigInt?
 }
 
 model descriptions {

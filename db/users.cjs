@@ -1,5 +1,4 @@
 /* eslint-disable no-useless-catch */
-// const { PrismaClient } = require("@prisma/client");
 const prisma = require("../client.cjs");
 const bcrypt = require("bcrypt");
 

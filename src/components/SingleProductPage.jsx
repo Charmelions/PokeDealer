@@ -1,6 +1,9 @@
+import { NavBar } from "./NavBar";
+
 export function SingleProductPage () {
   return (
     <>
+    <NavBar></NavBar>
     <div>
       <h1>PokéDealer</h1>
       <p id='welcomeText1'>An online store selling Pokémon.</p>

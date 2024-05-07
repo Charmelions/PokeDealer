@@ -1,8 +1,13 @@
+#masterball {
+  width: 46px;
+}
+
 h1 {
   text-align: center;
   font-size: 40px;
   color: rgb(44, 11, 208);
   margin-bottom: 5px;
+  margin-top: 5px;
 }
 
 #welcomeText1 {
@@ -33,6 +38,10 @@ h1 {
   height: 300px;
   width: 300px;
   margin: 10px;
+}
+
+#linkOnProductCard {
+  color:rgba(255, 255, 255, 0)
 }
 
 #pokemonImgUrl {

@@ -8,7 +8,7 @@ function App() {
   <>
   <Routes>
   <Route path="/" element={<Home />} />
-  <Route path="/:product_id" element={<SingleProductPage />} />
+  <Route path="/product_id" element={<SingleProductPage />} />
   </Routes>
   </>
   );

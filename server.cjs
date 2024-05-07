@@ -18,7 +18,7 @@ const accessLogStream = fs.createWriteStream(
   { flags: "a" }
 );
 
-//middleware
+// middleware
 app.use(
   morgan(
     ":method :url :status :res[content-length] - :response-time ms :date[web]",
@@ -52,9 +52,12 @@ app.use(async (req, res, next) => {
 });
 
 //API ROUTE (file location TBD)
-app.use("/", (req, res) => {
-  res.send("reached / endpoint");
+app.get("/", (req, res) => {
+  console.log("TEST");
+  res.sendFile(`${__dirname}/dist/index.html`);
 });
+
+app.use(express.static("dist"));
 
 // export default prisma
 

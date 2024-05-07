@@ -1,8 +1,11 @@
 import { ProductCard } from "./ProductCard";
+import { Link } from 'react-router-dom';
 
 export function Home () {
   return (
     <>
+    <Link to='/profile/2'>Profile Page</Link>
+
     <div>
       <h1>PokéDealer</h1>
       <p id='welcomeText1'>An online store selling Pokémon.</p>

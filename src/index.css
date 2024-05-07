@@ -30,8 +30,8 @@ h1 {
   align-items: center;
   flex-direction: column;
   background-color: rgb(162, 162, 162);
-  min-height: 300px;
-  min-width: 300px;
+  height: 300px;
+  width: 300px;
   margin: 10px;
 }
 
@@ -53,4 +53,35 @@ h1 {
 
 #homeFooter {
   text-align: center;
+}
+
+/* SingleProductPage.jsx styling */
+
+#detailedProductCardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#detailedProductCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgb(162, 162, 162);
+  height: 300px;
+  width: 300px;
+  margin: 10px;
+}
+
+#productDetailsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.moreProductDetailsText {
+  width: 300px;
+  white-space: wrap;
 }

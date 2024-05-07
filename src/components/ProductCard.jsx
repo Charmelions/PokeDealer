@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export function ProductCard () {
   return (
     <>
-      <a id='linkOnProductCard' href="/product_id">
+      <a id='linkOnProductCard' href="/:product_id">
         <div id='productCard'>
           <div>
             <img id='pokemonImgUrl' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"/>

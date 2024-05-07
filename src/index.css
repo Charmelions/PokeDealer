@@ -1,3 +1,9 @@
+#navbarbox {
+  display: flex;
+  justify-content: flex-end;
+  gap: 100px;
+}
+
 h1 {
   text-align: center;
   font-size: 40px;
@@ -89,4 +95,14 @@ h1 {
 .moreProductDetailsText {
   width: 300px;
   white-space: wrap;
+}
+
+/* RegistrationPage.jsx & LoginPage.jsx styling */
+
+.registerAndLoginHeadings {
+  text-align: center;
+}
+
+.sectionAtitleandtext {
+  text-align: center;
 }

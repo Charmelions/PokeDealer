@@ -1,4 +1,4 @@
-const pokemonRouter = require("express").Router();
+const apiRouter = express.Router();
 
 const {
   //   createStats,
@@ -18,7 +18,7 @@ const {
 // Read
 
 // Get all pokemon - PATH: /api/pokemon/
-pokemonRouter.get("/", async (req, res) => {
+apiRouter.get("/", async (req, res) => {
   try {
     //get all the pokemon
     const allPokemon = await getAllPokemon();
@@ -30,7 +30,7 @@ pokemonRouter.get("/", async (req, res) => {
 });
 
 // Get an pokemon by id - PATH: /api/pokemon/:id
-pokemonRouter.get("/:id", async (req, res) => {
+apiRouter.get("/:id", async (req, res) => {
   try {
     //get all the users
     const pokemonById = await getPokemonId();
@@ -45,4 +45,4 @@ pokemonRouter.get("/:id", async (req, res) => {
 
 // Delete
 
-module.exports = pokemonRouter;
+module.exports = apiRouter;

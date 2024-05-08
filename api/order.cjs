@@ -1,4 +1,4 @@
-const orderRouter = require("express").Router();
+const apiRouter = express.Router();
 
 const {
   // createUserViaCart,
@@ -13,7 +13,7 @@ const {
 // Read
 
 // Get all orders - PATH: /api/orders/
-orderRouter.get("/", async (req, res) => {
+apiRouter.get("/", async (req, res) => {
   try {
     //get all the orders
     const order = await getOrder();
@@ -25,7 +25,7 @@ orderRouter.get("/", async (req, res) => {
 });
 
 // Get an order by id - PATH: /api/order/:id
-orderRouter.get("/:id", async (req, res) => {
+apiRouter.get("/:id", async (req, res) => {
   try {
     //get all the users
     const orderId = await getOrderId();
@@ -40,4 +40,4 @@ orderRouter.get("/:id", async (req, res) => {
 
 // Delete
 
-module.exports = orderRouter;
+module.exports = apiRouter;

@@ -2,15 +2,17 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const apiRouter = express.Router();
 
+apiRouter.use("/cart", require("./cart.cjs"));
+
+apiRouter.use("/orders", require("./order.cjs"));
+
+apiRouter.use("/pokemon", require("./pokemon.cjs"));
+
+apiRouter.use("/users", require("./users.cjs"));
+
 const { getUserById } = require("../db/users.cjs");
 
-apiRouter.use("/", (req, res) => {
-  res.send("/api");
-});
-
 // middleware to establish and check for Authorization from Bearer
-//
-
 apiRouter.use(async (req, res, next) => {
   const prefix = "Bearer";
   const auth = req.header("Authorization");
@@ -46,22 +48,4 @@ apiRouter.use(async (req, res, next) => {
   }
 });
 
-const cartRouter = require("./cart.cjs");
-apiRouter.use("/cart", cartRouter);
-
-const orderRouter = require("./order.cjs");
-apiRouter.use("/orders", orderRouter);
-
-const pokemonRouter = require("./pokemon.cjs");
-apiRouter.use("/pokemon", pokemonRouter);
-
-const usersRouter = require("./users.cjs");
-apiRouter.use("/users", usersRouter);
-
-module.exports = {
-  apiRouter,
-  cartRouter,
-  orderRouter,
-  pokemonRouter,
-  usersRouter,
-};
+module.exports = { apiRouter };

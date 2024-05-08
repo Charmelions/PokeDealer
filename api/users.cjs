@@ -1,4 +1,4 @@
-const usersRouter = require("express").Router();
+const apiRouter = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -20,7 +20,7 @@ const signToken = (username, id) => {
 // Create/Login
 
 // register a new account - PATH: /api/users/register
-usersRouter.post("/register", async (req, res) => {
+apiRouter.post("/register", async (req, res) => {
   // given username and password on body
   const { username, password } = req.body;
 
@@ -44,7 +44,7 @@ usersRouter.post("/register", async (req, res) => {
 });
 
 // login to an existing account using jwt - PATH: /api/users/login
-usersRouter.post("/login", async (req, res) => {
+apiRouter.post("/login", async (req, res) => {
   //they give me a username and password on the body
   const username = req.body.username;
   const plainPassword = req.body.password;
@@ -81,7 +81,7 @@ usersRouter.post("/login", async (req, res) => {
 // Read
 
 // Get all users - PATH: /api/users/
-usersRouter.get("/", async (req, res) => {
+apiRouter.get("/", async (req, res) => {
   try {
     //get all the users
     const users = await getAllUsers();
@@ -95,7 +95,7 @@ usersRouter.get("/", async (req, res) => {
 // Update
 
 // Update a user's information - PATH: /api/users/:id
-usersRouter.put("/:id", async (req, res, next) => {
+apiRouter.put("/:id", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const saltRounds = 10;
@@ -114,4 +114,4 @@ usersRouter.put("/:id", async (req, res, next) => {
 
 // Delete
 
-module.exports = usersRouter;
+module.exports = apiRouter;

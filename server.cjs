@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use("/", express.static(path.join(__dirname, "charmelions/dist")));
 
 // generate and server.use an Express Router for the API
-const apiRouter = require("./api/index.cjs");
+const { apiRouter } = require("./api/index.cjs");
 app.use("/api", apiRouter);
 
 // creates our access.log file and stores our morgan log inside access.log

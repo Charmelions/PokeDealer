@@ -6,7 +6,7 @@ const importAllPokemon = async () => {
   try {
     const pokemonList = [];
     const pokemonDetails = [];
-    for (let i = 1; i < 16; i++) {
+    for (let i = 1; i < 26; i++) {
       const pokemonResponse = await fetch(`${POKE_API_URL}/${i}`);
       const pokemonObject = await pokemonResponse.json();
       const eachPokemon = pokemonObject;
@@ -39,9 +39,10 @@ const importPokemon = async (pokemon, details) => {
       rarityValue = 1000;
     }
 
-    const importedPokemon = await prisma.pokemon.create({
-      skipDuplicates: true,
-      data: {
+    const importedPokemon = await prisma.pokemon.upsert({
+      where: { pokemonId: pokemon.id },
+      update: {},
+      create: {
         pokemonId: pokemon.id,
         name: pokemon.name[0].toUpperCase() + pokemon.name.slice([1]),
         price: details.capture_rate * rarityValue,
@@ -49,16 +50,16 @@ const importPokemon = async (pokemon, details) => {
         count: 99,
         statsId: {
           create: {
-            hp: pokemon.stats[0].base_stat,
-            attack: pokemon.stats[1].base_stat,
-            defense: pokemon.stats[2].base_stat,
-            speed: pokemon.stats[5].base_stat,
+            hp: pokemon.stats[0]?.base_stat,
+            attack: pokemon.stats[1]?.base_stat,
+            defense: pokemon.stats[2]?.base_stat,
+            speed: pokemon.stats[5]?.base_stat,
           },
         },
         typesId: {
           create: {
-            typeOne: pokemon.types[0].type.name,
-            typeTwo: pokemon.types[1].type.name,
+            typeOne: pokemon.types[0]?.type?.name,
+            typeTwo: pokemon.types[1]?.type?.name,
           },
         },
         spritesId: {

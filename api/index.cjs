@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const apiRouter = express.Router();
 
-const { getUserById } = require("../db/index");
+const { getUserById } = require("../db/users.cjs");
 
 apiRouter.use("/", (req, res) => {
   res.send("/api");

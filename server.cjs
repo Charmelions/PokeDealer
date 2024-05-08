@@ -12,6 +12,10 @@ const PORT = process.env.PORT || 3000;
 // publish our dist folder for publication
 app.use("/", express.static(path.join(__dirname, "charmelions/dist")));
 
+// generate and server.use an Express Router for the API
+const apiRouter = require("./api/index.cjs");
+app.use("/api", apiRouter);
+
 // creates our access.log file and stores our morgan log inside access.log
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
@@ -52,10 +56,6 @@ app.use(async (req, res, next) => {
     next();
   }
 });
-
-// generate and server.use an Express Router for the API
-const apiRouter = require("./api/index.cjs");
-app.use("/api", apiRouter);
 
 // export default prisma
 

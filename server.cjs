@@ -51,13 +51,13 @@ app.use(async (req, res, next) => {
   }
 });
 
-//API ROUTE (file location TBD)
-app.get("/", (req, res) => {
-  console.log("TEST");
-  res.sendFile(`${__dirname}/dist/index.html`);
-});
+// //API ROUTE (file location TBD)
+// app.get("/", (req, res) => {
+//   console.log("TEST");
+//   res.sendFile(`${__dirname}/dist/index.html`);
+// });
 
-app.use("/", express.static(path.join(__dirname, "./client/dist")));
+app.use("/", express.static(path.join(__dirname, "./charmelions/dist")));
 
 // export default prisma
 

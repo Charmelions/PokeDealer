@@ -1,5 +1,6 @@
 const prisma = require("../client.cjs");
 const bcrypt = require("bcrypt");
+const importAllPokemon = require("./import.cjs");
 
 const { createCart } = require("./cart.cjs");
 const { createOrder } = require("./order.cjs");
@@ -8,25 +9,48 @@ const {
   createType,
   createSprites,
   createDescriptions,
-  createCategories,
   createPokemon,
-  addSpritesToPokemon,
 } = require("./pokemon.cjs");
 const { createUser } = require("./users.cjs");
 
-const users = [];
-const tags = [];
+const cart = [];
+const order = [];
+const stats = [];
+const type = [];
+const sprites = [];
+const descriptions = [];
+const pokemon = [];
+const user = [];
 
 const restart = async () => {
   await prisma.stats.deleteMany({});
   await prisma.types.deleteMany({});
   await prisma.sprites.deleteMany({});
   await prisma.descriptions.deleteMany({});
-  await prisma.categories.deleteMany({});
   await prisma.pokemon.deleteMany({});
   await prisma.cart.deleteMany({});
   await prisma.order.deleteMany({});
   await prisma.user.deleteMany({});
+  importAllPokemon();
+};
+
+const addCart = async () => {
+  console.log("Create cart");
+  const cart1 = {
+    count: 2,
+    pokemon: [1, 2, 3],
+    user: 1,
+  };
+  const cart2 = {
+    count: 1,
+    pokemon: [4, 5],
+    user: 2,
+  };
+
+  cart.push(await createCart(cart1));
+  cart.push(await createCart(cart2));
+
+  console.log("Cart create end");
 };
 
 const addUsers = async () => {
@@ -61,55 +85,12 @@ const addTags = async () => {
   tags.push(await createTag(tag3));
 };
 
-const importedImages = async () => {
-  console.log("PAINT ME LIKE ONE OF YOUR GIRLS");
-  const thomasjob = [
-    {
-      id: "cc0283e0-2086-470a-9140-ff087e0866aa",
-      enqueue_time: "2024-03-29T21:32:34.446189+00:00",
-      job_type: "v6_virtual_upsample",
-      event_type: "diffusion_upsample_v6_virtual",
-      parent_grid: 3,
-      parent_id: "84eb0c84-8a93-4489-8114-8f7ebe9eddc6",
-      full_command: "Ghibli flower white tones, background --tile --s 250",
-      batch_size: 1,
-      width: 1024,
-      height: 1024,
-      published: true,
-      shown: true,
-      rating: null,
-    },
-    {
-      id: "84eb0c84-8a93-4489-8114-8f7ebe9eddc6",
-      enqueue_time: "2024-03-29T21:31:47.846682+00:00",
-      job_type: "v6_diffusion",
-      event_type: "diffusion",
-      parent_grid: null,
-      parent_id: null,
-      full_command: "Ghibli flower white tones, background --tile --s 250",
-      batch_size: 4,
-      width: 1024,
-      height: 1024,
-      published: true,
-      shown: true,
-      rating: null,
-    },
-  ];
-
-  const imported = await importImages(thomasjob);
-
-  console.log("NOT LIKE THAT :(");
-
-  return imported;
-};
-
 const seed = async () => {
   console.log("WATERING SEED");
 
   await restart();
   await addUsers();
   await addTags();
-  await importedImages();
 
   console.log("A FLOWER HAS BLOOMED");
 };

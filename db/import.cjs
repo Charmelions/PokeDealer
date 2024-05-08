@@ -90,6 +90,4 @@ const importPokemon = async (pokemon, details) => {
   }
 };
 
-importAllPokemon();
-
 module.exports = { importAllPokemon };

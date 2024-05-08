@@ -3,10 +3,10 @@ const prisma = require("../client.cjs");
 
 // Create
 
-const createStats = async ({ baseStat }) => {
+const createStats = async ({ hp, attack, defense, speed }) => {
   try {
     const newStats = await prisma.stats.create({
-      data: { baseStat },
+      data: { hp, attack, defense, speed },
     });
 
     return newStats;
@@ -16,10 +16,10 @@ const createStats = async ({ baseStat }) => {
   }
 };
 
-const createType = async ({ typeName }) => {
+const createType = async ({ typeOne, typeTwo }) => {
   try {
     const newType = await prisma.types.create({
-      data: { typeName },
+      data: { typeOne, typeTwo },
     });
 
     return newType;
@@ -54,28 +54,17 @@ const createSprites = async ({
   }
 };
 
-const createDescriptions = async ({ descriptions }) => {
+const createDescriptions = async ({ description }) => {
   try {
-    const newType = await prisma.descriptions.create({
-      data: { descriptions },
+    const newDescription = await prisma.descriptions.create({
+      data: {
+        description,
+      },
     });
 
-    return newType;
+    return newDescription;
   } catch (err) {
     console.log("Error creating descriptions", err);
-    throw err;
-  }
-};
-
-const createCategories = async ({ name, description }) => {
-  try {
-    const newType = await prisma.categories.create({
-      data: { name, description },
-    });
-
-    return newType;
-  } catch (err) {
-    console.log("Error creating categories", err);
     throw err;
   }
 };
@@ -90,7 +79,6 @@ const createPokemon = async ({
   typesId,
   spritesId,
   descriptionsId,
-  categoriesId,
 }) => {
   try {
     const pokemon = await prisma.pokemon.create({
@@ -104,13 +92,12 @@ const createPokemon = async ({
         typesId,
         spritesId,
         descriptionsId,
-        categoriesId,
       },
     });
 
     return pokemon;
   } catch (err) {
-    console.log("Error creating user", err);
+    console.log("Error creating Pokemon", err);
     throw err;
   }
 };
@@ -152,8 +139,7 @@ const updatePokemon = async (
   statsId,
   typesId,
   spritesId,
-  descriptionsId,
-  categoriesId
+  descriptionsId
 ) => {
   try {
     const updatedPokemon = await prisma.pokemon.update({
@@ -169,7 +155,6 @@ const updatePokemon = async (
         typesId,
         spritesId,
         descriptionsId,
-        categoriesId,
       },
     });
 
@@ -181,7 +166,6 @@ const updatePokemon = async (
 
 const addSpritesToPokemon = async (
   pokemonId,
-  spritesId,
   dreamDefault,
   homeDefault,
   homeShiny,
@@ -234,7 +218,6 @@ module.exports = {
   createType,
   createSprites,
   createDescriptions,
-  createCategories,
   createPokemon,
   getAllPokemon,
   getPokemonId,

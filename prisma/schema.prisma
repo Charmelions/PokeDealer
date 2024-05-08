@@ -15,14 +15,22 @@ datasource db {
 
 model stats {
   statsId   BigInt   @id @default(autoincrement())
-  baseStat  BigInt
+  // hp equals the base_stat for the hp stat
+  hp        BigInt?
+  // attack equals the base_stat for the attack stat
+  attack    BigInt?
+  // defense equals the base_stat for the defense stat
+  defense   BigInt?
+  // speed equals the base_stat for the speed stat
+  speed     BigInt?
   pokemon   pokemon? @relation(fields: [pokemonId], references: [pokemonId])
   pokemonId BigInt?
 }
 
 model types {
   typesId   BigInt   @id @default(autoincrement())
-  typeName  String
+  typeOne   String?
+  typeTwo   String?
   pokemon   pokemon? @relation(fields: [pokemonId], references: [pokemonId])
   pokemonId BigInt?
 }
@@ -45,22 +53,15 @@ model sprites {
 
 model descriptions {
   descriptionsId BigInt   @id @default(autoincrement())
-  descriptions   String
+  description    String?
   pokemon        pokemon? @relation(fields: [pokemonId], references: [pokemonId])
   pokemonId      BigInt?
-}
-
-model categories {
-  categoriesId BigInt   @id @default(autoincrement())
-  name         String
-  description  String
-  pokemon      pokemon? @relation(fields: [pokemonId], references: [pokemonId])
-  pokemonId    BigInt?
 }
 
 model pokemon {
   pokemonId      BigInt         @id
   name           String
+  // price equals capture_rate (from details) times rarity
   price          BigInt
   rarity         BigInt
   count          BigInt
@@ -68,7 +69,6 @@ model pokemon {
   typesId        types[]
   spritesId      sprites[]
   descriptionsId descriptions[]
-  categoriesId   categories[]
   cart           cart_pokemon[]
 }
 

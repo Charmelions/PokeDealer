@@ -3,15 +3,15 @@ const prisma = require("../client.cjs");
 
 // Create/POST
 
-const createCart = async ({ count, pokemon }) => {
+const createCart = async ({ count, pokemon, user }) => {
   try {
     const cartDB = await prisma.cart.create({
-      data: { count, pokemon },
+      data: { count, pokemon, user },
     });
 
     return cartDB;
   } catch (err) {
-    console.log("Error creating Cart", err);
+    console.log("Error creating cart", err);
     throw err;
   }
 };

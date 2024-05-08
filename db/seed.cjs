@@ -1,18 +1,32 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
-
-const { importImages } = require("./images.cjs");
-const { createTag } = require("./tags.cjs");
-const { createUser } = require("./users.cjs");
+const prisma = require("../client.cjs");
 const bcrypt = require("bcrypt");
+
+const { createCart } = require("./cart.cjs");
+const { createOrder } = require("./order.cjs");
+const {
+  createStats,
+  createType,
+  createSprites,
+  createDescriptions,
+  createCategories,
+  createPokemon,
+  addSpritesToPokemon,
+} = require("./pokemon.cjs");
+const { createUser } = require("./users.cjs");
 
 const users = [];
 const tags = [];
 
 const restart = async () => {
-  await prisma.users.deleteMany({});
-  await prisma.tags.deleteMany({});
-  await prisma.images.deleteMany({});
+  await prisma.stats.deleteMany({});
+  await prisma.types.deleteMany({});
+  await prisma.sprites.deleteMany({});
+  await prisma.descriptions.deleteMany({});
+  await prisma.categories.deleteMany({});
+  await prisma.pokemon.deleteMany({});
+  await prisma.cart.deleteMany({});
+  await prisma.order.deleteMany({});
+  await prisma.user.deleteMany({});
 };
 
 const addUsers = async () => {

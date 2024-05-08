@@ -6,8 +6,12 @@ const bcrypt = require("bcrypt");
 
 const createUser = async ({ firstAndLastName, email, username, password }) => {
   try {
+    const plainTextPassword = password;
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(plainTextPassword, saltRounds);
+
     const newUser = await prisma.user.create({
-      data: { firstAndLastName, email, username, password },
+      data: { firstAndLastName, email, username, password: hashedPassword },
     });
 
     return newUser;

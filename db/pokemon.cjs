@@ -75,10 +75,18 @@ const createPokemon = async ({
   price,
   rarity,
   count,
-  statsId,
-  typesId,
-  spritesId,
-  descriptionsId,
+  hp,
+  attack,
+  defense,
+  speed,
+  typeOne,
+  typeTwo,
+  dreamDefault,
+  homeDefault,
+  homeShiny,
+  officialDefault,
+  officialShiny,
+  description,
 }) => {
   try {
     const pokemon = await prisma.pokemon.create({
@@ -88,10 +96,34 @@ const createPokemon = async ({
         price,
         rarity,
         count,
-        statsId,
-        typesId,
-        spritesId,
-        descriptionsId,
+        statsId: {
+          create: {
+            hp,
+            attack,
+            defense,
+            speed,
+          },
+        },
+        typesId: {
+          create: {
+            typeOne,
+            typeTwo,
+          },
+        },
+        spritesId: {
+          create: {
+            dreamDefault,
+            homeDefault,
+            homeShiny,
+            officialDefault,
+            officialShiny,
+          },
+        },
+        descriptionsId: {
+          create: {
+            description,
+          },
+        },
       },
     });
 

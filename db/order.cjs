@@ -1,17 +1,57 @@
 /* eslint-disable no-useless-catch */
 const prisma = require("../client.cjs");
+const bcrypt = require("bcrypt");
 
 // Create/POST
 
-const createOrder = async ({ userId, cartId }) => {
+const createUserViaCart = async ({
+  firstAndLastName,
+  email,
+  username,
+  password,
+  cartId,
+  count,
+  cart_pokemon,
+  userId,
+}) => {
   try {
-    const orderDB = await prisma.order.create({
-      data: { userId, cartId },
-    });
+    const plainTextPassword = password;
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(plainTextPassword, saltRounds);
 
-    return orderDB;
+    // table we are creating data in
+    await prisma.user.create({
+      data: {
+        // data in the users table includes:
+        firstAndLastName,
+        email,
+        username,
+        password: hashedPassword,
+        // the cart is its own table
+        // so we can connect/create that from inside this user.create
+        // with that, now we can create or connect to an existing cart
+        cart: {
+          create: [
+            {
+              // include all the data needed to create a new cart
+              cart: {
+                connectOrCreate: {
+                  where: {
+                    cartId,
+                  },
+                  create: {
+                    count,
+                    pokemon: cart_pokemon,
+                    user: userId,
+                  },
+                },
+              },
+            },
+          ],
+        },
+      },
+    });
   } catch (err) {
-    console.log("Error creating order", err);
     throw err;
   }
 };
@@ -76,7 +116,7 @@ const deleteOrder = async (orderId) => {
 };
 
 module.exports = {
-  createOrder,
+  createUserViaCart,
   getOrder,
   getOrderId,
   updateOrder,

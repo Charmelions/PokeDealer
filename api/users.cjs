@@ -3,11 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const {
-  registerUser,
+  createUser,
   getAllUsers,
   getUserByUsername,
   updateUser,
-} = require("../db");
+} = require("../db/users.cjs");
 
 // if the user logs in give them a signed token in state
 const signToken = (username, id) => {
@@ -30,7 +30,7 @@ usersRouter.post("/register", async (req, res) => {
 
   try {
     //Create the user with the username and hashed password
-    const user = registerUser(username, hashedPassword);
+    const user = createUser(username, hashedPassword);
 
     //Sign a token with user info
     const token = signToken(user.username, user.id);

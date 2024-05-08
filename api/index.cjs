@@ -50,7 +50,7 @@ const cartRouter = require("./cart.cjs");
 apiRouter.use("/cart", cartRouter);
 
 const orderRouter = require("./order.cjs");
-apiRouter.use("/order", orderRouter);
+apiRouter.use("/orders", orderRouter);
 
 const pokemonRouter = require("./pokemon.cjs");
 apiRouter.use("/pokemon", pokemonRouter);

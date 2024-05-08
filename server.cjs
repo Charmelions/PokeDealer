@@ -26,6 +26,8 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+const { getUserById } = require("./db/users.cjs");
+
 // Parse the apiRouter headers to see if there is a token on the user ID (will require a getUserById from a db function and requires jsonwebtoken))
 app.use(async (req, res, next) => {
   const authHeader = req.header("Authorization");
@@ -49,7 +51,7 @@ app.use(async (req, res, next) => {
 });
 
 //API ROUTE (file location TBD)
-app.use("/", (req, res) => {
+app.use("/", (__dirname, req, res) => {
   res.sendFile(`${__dirname}/dist/index.html`);
 });
 

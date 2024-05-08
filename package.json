@@ -11,7 +11,7 @@
     "test": "jest -i",
     "seed": "node ./db/seed.cjs",
     "start": "node ./server.cjs",
-    "seed:dev": "npx prisma migrate reset --force && node ./seed.cjs",
+    "seed:dev": "npx prisma migrate reset --force && node ./db/seed.cjs",
     "build": "npm install && npm run seed:dev && cd ./client && npm install && npm run build"
   },
   "dependencies": {

@@ -55,7 +55,7 @@ apiRouter.use("/orders", orderRouter);
 const pokemonRouter = require("./pokemon.cjs");
 apiRouter.use("/pokemon", pokemonRouter);
 
-const usersRouter = require("./users");
+const usersRouter = require("./users.cjs");
 apiRouter.use("/users", usersRouter);
 
 module.exports = {

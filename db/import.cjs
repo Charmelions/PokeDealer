@@ -40,6 +40,7 @@ const importPokemon = async (pokemon, details) => {
     }
 
     const importedPokemon = await prisma.pokemon.create({
+      skipDuplicates: true,
       data: {
         pokemonId: pokemon.id,
         name: pokemon.name[0].toUpperCase() + pokemon.name.slice([1]),

@@ -54,7 +54,7 @@ app.use(async (req, res, next) => {
 });
 
 // generate and server.use an Express Router for the API
-const apiRouter = require("./api");
+const apiRouter = require("./api/index.cjs");
 app.use("/api", apiRouter);
 
 // export default prisma

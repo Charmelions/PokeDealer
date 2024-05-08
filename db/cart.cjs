@@ -6,7 +6,7 @@ const prisma = require("../client.cjs");
 const createCart = async ({ count, cart_pokemon, order }) => {
   try {
     const newCart = await prisma.cart.create({
-      data: { count, pokemon: cart_pokemon.pokemonId, user: order.userId },
+      data: { count, pokemon: cart_pokemon, user: order },
     });
 
     return newCart;

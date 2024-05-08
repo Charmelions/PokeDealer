@@ -82,7 +82,7 @@ model cart_pokemon {
 
 model cart {
   cartId  BigInt         @id @default(autoincrement())
-  count   BigInt
+  count   BigInt?
   pokemon cart_pokemon[]
   user    order[]
 }

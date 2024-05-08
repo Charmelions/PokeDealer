@@ -9,7 +9,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "nodemon server.cjs",
-    "test": "jest -i"
+    "test": "jest -i",
+    "seed": "node ./db/seed.cjs"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",

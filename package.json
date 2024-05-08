@@ -12,7 +12,7 @@
     "seed": "node ./db/seed.cjs",
     "start": "node ./server.cjs",
     "seed:dev": "npx prisma migrate reset --force && node ./db/seed.cjs",
-    "build": "npm install && npm run seed:dev && cd ./client && npm install && npm run build"
+    "build": "npm install && npm run seed:dev && cd ./charmelions && npm install && npm run build"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",

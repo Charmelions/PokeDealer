@@ -247,9 +247,6 @@ const addOrder = async () => {
     user: 2,
   };
 
-  console.log(order1);
-  console.log(order2);
-
   order.push(await createUserViaCart(order1));
   order.push(await createUserViaCart(order2));
 

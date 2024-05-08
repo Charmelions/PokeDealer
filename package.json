@@ -5,12 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "server": "nodemon server.cjs",
     "test": "jest -i",
-    "seed": "node ./db/seed.cjs"
+    "seed": "node ./db/seed.cjs",
+    "start": "node ./server.cjs",
+    "seed:dev": "npx prisma migrate reset --force && node ./seed.cjs",
+    "build": "npm install && npm run seed:dev && cd ./client && npm install && npm run build"
   },
   "dependencies": {
     "@prisma/client": "^5.13.0",

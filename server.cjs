@@ -9,6 +9,9 @@ const jwt = require("jsonwebtoken");
 
 const PORT = process.env.PORT || 3000;
 
+// publish our dist folder for publication
+app.use("/", express.static(path.join(__dirname, "charmelions/dist")));
+
 // creates our access.log file and stores our morgan log inside access.log
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "access.log"),
@@ -50,10 +53,9 @@ app.use(async (req, res, next) => {
   }
 });
 
-//API ROUTE (file location TBD)
-app.use("/", (__dirname, req, res) => {
-  res.sendFile(`${__dirname}/dist/index.html`);
-});
+// generate and server.use an Express Router for the API
+const apiRouter = require("./api");
+app.use("/api", apiRouter);
 
 // export default prisma
 

@@ -95,7 +95,7 @@ usersRouter.get("/", async (req, res) => {
 // Update
 
 // Update a user's information - PATH: /api/users/:id
-router.put("/:id", async (req, res, next) => {
+usersRouter.put("/:id", async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const saltRounds = 10;

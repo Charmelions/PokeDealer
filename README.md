@@ -3,6 +3,8 @@ Welcome to PokéDealer - an e-commerce website where you can buy Pokémon! Why c
 
 This project was created by Hannah J., Char B., and Anusha S., and overseen by our instructors Jonathan, Tyler, and T.A. Divya. It served as an e-commerce website project for Fullstack Academy.
 
+![Screenshot 2024-05-06 at 11 41 57 AM](https://github.com/user-attachments/assets/eb0c40ae-bab8-4e8b-950f-74c4c933bd70)
+
 ## Project Description
 PokéDealer is an e-commerce website where you can buy Pokémon! It pulls Pokémon data from an API called PokéApi. It was created using the following languages:
 - HTML/CSS
